@@ -31,8 +31,10 @@ public class ServletLogin extends HttpServlet {
         if(user == null){
             request.getRequestDispatcher("/ServletLoginfalse").forward(request,response);
         }else{
+            //将读取到数据库的数据储存在共享域中
             request.setAttribute("user",user);
-            request.getRequestDispatcher("/ServletLogintrue").forward(request,response);
+            //转发
+            request.getRequestDispatcher("/ServletHome").forward(request,response);
         }
 
     }

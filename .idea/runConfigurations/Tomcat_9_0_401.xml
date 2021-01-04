@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Tomcat 9.0.401" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.401" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-    <option name="UPDATING_POLICY" value="restart-server" />
+    <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+    <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
     <deployment>
       <artifact name="Salary:war exploded">
         <settings>
