@@ -136,8 +136,8 @@
                 <td>${employee.egrade}</td>
                 <td>${employee.erank}</td>
                 <td>${employee.ewalfare}</td>
-                <td><a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/findUserServlet?id=${user.id}">修改</a>&nbsp;
-                    <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id});">删除</a></td>
+                <td><a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/findUserServlet?eno=${employee.eno}">修改</a>&nbsp;
+                    <a class="btn btn-default btn-sm" href="javascript:deleteUser(${employee.eno});">删除</a></td>
             </tr>
 
         </c:forEach>

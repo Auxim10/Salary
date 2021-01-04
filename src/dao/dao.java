@@ -15,7 +15,7 @@ public interface dao {
 
     void add(Employee employee);
 
-    void delete(int id);
+    void delete(String eno);
 
     Employee findById(int i);
 

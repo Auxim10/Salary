@@ -25,13 +25,13 @@ public class EmployeeDaoImpl implements dao {
     @Override
     public void add(Employee employee) {
         //1.定义sql
-        String sql = "insert into employee values(?,?,?,?,?,?,?)";
+        String sql = "insert into employee values(?,?,?,?,?,?,?,?)";
         //2.执行sql
-        template.update(sql,employee.getEno(),employee.getEname(), employee.getEdept(), employee.getEsex(), employee.getEgrade(), employee.getErank(), employee.getEwalfare());
+        template.update(sql,employee.getEno(),employee.getEname(), employee.getEdept(), employee.getEsex(), employee.getEgrade(), employee.getErank(), employee.getEage(),employee.getEwalfare());
     }
 
     @Override
-    public void delete(int eno) {
+    public void delete(String eno) {
         //1.定义sql
         String sql = "delete from employee where eno = ?";
         //2.执行sql
@@ -46,8 +46,8 @@ public class EmployeeDaoImpl implements dao {
 
     @Override
     public void update(Employee employee) {
-        String sql = "update employee set ename = ? ,edept = ? , esex = ? , egrade = ?, erank = ?,eage = ?,ewalfare = ? where eno = ?";
-        template.update(sql, employee.getEname(), employee.getEdept(), employee.getEsex(), employee.getEgrade(), employee.getErank(), employee.getEage(), employee.getEwalfare());
+        String sql = "update employee set eno = ?,ename = ? ,edept = ? , esex = ? , egrade = ?, erank = ?,eage = ?,ewalfare = ? where eno = ?";
+        template.update(sql, employee.getEno(),employee.getEname(), employee.getEdept(), employee.getEsex(), employee.getEgrade(), employee.getErank(), employee.getEage(), employee.getEwalfare(),employee.getEno());
     }
 
     @Override

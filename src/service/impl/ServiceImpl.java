@@ -29,7 +29,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public void deleteUser(String eno) {
-        dao.delete(Integer.parseInt(eno));
+        dao.delete(eno);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ServiceImpl implements Service {
             //1.遍历数组
             for (String eno : enos) {
                 //2.调用dao删除
-                dao.delete(Integer.parseInt(eno));
+                dao.delete(eno);
             }
         }
 

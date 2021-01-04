@@ -25,41 +25,69 @@
 </head>
 <body>
 <div class="container">
-    <center><h3>添加联系人页面</h3></center>
+    <center><h3>添加员工页面</h3></center>
     <form action="${pageContext.request.contextPath}/addUserServlet" method="post">
         <div class="form-group">
-            <label for="name">姓名：</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="请输入姓名">
+            <label for="eno">员工号：</label>
+            <input type="text" class="form-control" id="eno" name="eno" placeholder="请输入员工号">
+        </div>
+
+        <div class="form-group">
+            <label for="ename">姓名：</label>
+            <input type="text" class="form-control" id="ename" name="ename" placeholder="请输入姓名">
         </div>
 
         <div class="form-group">
             <label>性别：</label>
-            <input type="radio" name="gender" value="男" checked="checked"/>男
-            <input type="radio" name="gender" value="女"/>女
+            <input type="radio" name="esex" value="男" checked="checked"/>男
+            <input type="radio" name="esex" value="女"/>女
         </div>
 
-        <div class="form-group">
-            <label for="age">年龄：</label>
-            <input type="text" class="form-control" id="age" name="age" placeholder="请输入年龄">
-        </div>
 
         <div class="form-group">
-            <label for="address">籍贯：</label>
-            <select name="address" class="form-control" id="address">
-                <option value="陕西">陕西</option>
-                <option value="北京">北京</option>
-                <option value="上海">上海</option>
+            <label for="edept">部门：</label>
+            <select name="edept" class="form-control" id="edept">
+                <option value="公关">公关</option>
+                <option value="客户">客户</option>
+                <option value="广告">广告</option>
+                <option value="技术">技术</option>
+                <option value="运营">运营</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="qq">QQ：</label>
-            <input type="text" class="form-control" id="qq" name="qq" placeholder="请输入QQ号码"/>
+            <label for="egrade">职位：</label>
+            <select name="egrade" class="form-control" id="egrade">
+                <option value="经理">经理</option>
+                <option value="主管">主管</option>
+                <option value="员工">员工</option>
+                <option value="实习生">实习生</option>
+            </select>
         </div>
 
         <div class="form-group">
-            <label for="email">Email：</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱地址"/>
+            <label for="erank">评价：</label>
+            <select name="erank" class="form-control" id="erank">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="eage">工龄：</label>
+            <input type="number" class="form-control" id="eage" name="eage" placeholder="请输入工龄"/>
+        </div>
+
+        <div class="form-group">
+            <label for="ewalfare">福利：</label>
+            <select name="ewalfare" class="form-control" id="ewalfare">
+                <option value="null">无</option>
+                <option value="节日">节日</option>
+                <option value="补贴">补贴</option>
+                <option value="加班">加班</option>
+            </select>
         </div>
 
         <div class="form-group" style="text-align: center">

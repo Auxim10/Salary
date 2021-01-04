@@ -15,10 +15,10 @@ import java.io.IOException;
 public class FindUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //1.获取id
-        String id = request.getParameter("eno");
+        String eno = request.getParameter("eno");
         //2.调用Service查询
         Service service = new ServiceImpl();
-        Employee employee = service.findUserById(id);
+        Employee employee = service.findUserById(eno);
 
         //3.将user存入request
         request.setAttribute("employee",employee);
