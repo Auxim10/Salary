@@ -1,6 +1,8 @@
 package dao;
 
 import domain.Employee;
+import domain.Salary;
+import domain.User;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,9 +17,15 @@ public interface dao {
 
     void add(Employee employee);
 
+    boolean re(String eno);
+
     void delete(String eno);
 
-    Employee findById(int i);
+    Employee findById(String i);
+
+    User findUserByUsernameAndPassword(String username, String password);
+
+    Salary deptsalary(Salary salary,String dept);
 
     void update(Employee employee);
 
@@ -28,6 +36,7 @@ public interface dao {
      */
     int findTotalCount(Map<String, String[]> condition);
 
+
     /**
      * 分页查询每页记录
      * @param start
@@ -36,4 +45,6 @@ public interface dao {
      * @return
      */
     List<Employee> findByPage(int start, int rows, Map<String, String[]> condition);
+
+    void refresh(String eno);
 }

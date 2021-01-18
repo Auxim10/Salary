@@ -1,6 +1,7 @@
 package domain;
 
 public class Employee {
+    private String id;
     private String eno;
     private String ename;
     private String edept;
@@ -8,7 +9,7 @@ public class Employee {
     private String egrade;
     private String erank;
     private Integer eage;
-    private String ewalfare;
+    private String ewelfare;
 
     public String getEno() {
         return eno;
@@ -66,12 +67,20 @@ public class Employee {
         this.eage = eage;
     }
 
-    public String getEwalfare() {
-        return ewalfare;
+    public String getEwelfare() {
+        return ewelfare;
     }
 
-    public void setEwalfare(String ewalfare) {
-        this.ewalfare = ewalfare;
+    public void setEwelfare(String ewelfare) {
+        this.ewelfare = ewelfare;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -84,7 +93,7 @@ public class Employee {
                 ", egrade='" + egrade + '\'' +
                 ", erank='" + erank + '\'' +
                 ", eage=" + eage +
-                ", ewalfare='" + ewalfare + '\'' +
+                ", ewelfare='" + ewelfare + '\'' +
                 '}';
     }
 }

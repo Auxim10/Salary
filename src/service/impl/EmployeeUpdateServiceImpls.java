@@ -3,6 +3,7 @@ package service.impl;
 import dao.Impl.EmployeeDaoImpl;
 import dao.dao;
 import domain.Employee;
+import domain.User;
 import operate.PageBean;
 import service.Service;
 
@@ -17,8 +18,13 @@ public class EmployeeUpdateServiceImpls implements Service {
     }
 
     @Override
-    public Employee login(Employee employee) {
+    public User login(User user) {
         return null;
+    }
+
+    @Override
+    public boolean repeat(Employee employee) {
+        return false;
     }
 
 
@@ -34,7 +40,7 @@ public class EmployeeUpdateServiceImpls implements Service {
 
     @Override
     public Employee findUserById(String eno) {
-        return dao.findById(Integer.parseInt(eno));
+        return dao.findById(eno);
     }
 
     @Override

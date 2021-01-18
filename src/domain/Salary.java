@@ -4,7 +4,7 @@ public class Salary {
     private String sno;
     private String sname;
     private int basicsalary;
-    private int vacationsalary;
+    private int vocationsalary;
     private int agesalary;
     private int welfare;
     private int allsalary;
@@ -33,12 +33,12 @@ public class Salary {
         this.basicsalary = basicsalary;
     }
 
-    public int getVacationsalary() {
-        return vacationsalary;
+    public int getVocationsalary() {
+        return vocationsalary;
     }
 
-    public void setVacationsalary(int vacationsalary) {
-        this.vacationsalary = vacationsalary;
+    public void setVocationsalary(int vocationsalary) {
+        this.vocationsalary = vocationsalary;
     }
 
     public int getAgesalary() {
@@ -64,4 +64,18 @@ public class Salary {
     public void setAllsalary(int allsalary) {
         this.allsalary = allsalary;
     }
+
+    @Override
+    public String toString() {
+        return "Salary{" +
+                "sno='" + sno + '\'' +
+                ", sname='" + sname + '\'' +
+                ", basicsalary=" + basicsalary +
+                ", vocationsalary=" + vocationsalary +
+                ", agesalary=" + agesalary +
+                ", welfare=" + welfare +
+                ", allsalary=" + allsalary +
+                '}';
+    }
 }
+

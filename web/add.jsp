@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- HTML5文档-->
@@ -14,7 +15,7 @@
     initial-scale: 初始的缩放比，为1:1 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>添加用户</title>
+    <title>添加员工</title>
 
     <!-- 1. 导入CSS的全局样式 -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,12 +30,12 @@
     <form action="${pageContext.request.contextPath}/addUserServlet" method="post">
         <div class="form-group">
             <label for="eno">员工号：</label>
-            <input type="text" class="form-control" id="eno" name="eno" placeholder="请输入员工号">
+            <input type="number" class="form-control" id="eno" name="eno" maxlength="8" placeholder="请输入员工号">
         </div>
 
         <div class="form-group">
             <label for="ename">姓名：</label>
-            <input type="text" class="form-control" id="ename" name="ename" placeholder="请输入姓名">
+            <input type="text" class="form-control" id="ename" name="ename" maxlength="10" placeholder="请输入姓名">
         </div>
 
         <div class="form-group">
@@ -47,21 +48,19 @@
         <div class="form-group">
             <label for="edept">部门：</label>
             <select name="edept" class="form-control" id="edept">
-                <option value="公关">公关</option>
-                <option value="客户">客户</option>
-                <option value="广告">广告</option>
-                <option value="技术">技术</option>
-                <option value="运营">运营</option>
+            <c:forEach items="${departments}" var="departmnet" varStatus="s">
+                <option value=${departmnet.dname}>${departmnet.dname}</option>
+            </c:forEach>
             </select>
         </div>
+
 
         <div class="form-group">
             <label for="egrade">职位：</label>
             <select name="egrade" class="form-control" id="egrade">
-                <option value="经理">经理</option>
-                <option value="主管">主管</option>
-                <option value="员工">员工</option>
-                <option value="实习生">实习生</option>
+                <c:forEach items="${salarygrades}" var="salarygrade" varStatus="s">
+                    <option value=${salarygrade.grade}>${salarygrade.grade}</option>
+                </c:forEach>
             </select>
         </div>
 
@@ -77,23 +76,22 @@
 
         <div class="form-group">
             <label for="eage">工龄：</label>
-            <input type="number" class="form-control" id="eage" name="eage" placeholder="请输入工龄"/>
+            <input type="number" class="form-control" id="eage" name="eage" maxlength="2" placeholder="请输入工龄"/>
         </div>
 
         <div class="form-group">
-            <label for="ewalfare">福利：</label>
-            <select name="ewalfare" class="form-control" id="ewalfare">
-                <option value="null">无</option>
-                <option value="节日">节日</option>
-                <option value="补贴">补贴</option>
-                <option value="加班">加班</option>
+            <label for="ewelfare">福利：</label>
+            <select name="ewelfare" class="form-control" id="ewelfare">
+                <c:forEach items="${welfares}" var="welfare" varStatus="s">
+                    <option value=${welfare.wname}>${welfare.wname}</option>
+                </c:forEach>
             </select>
         </div>
 
         <div class="form-group" style="text-align: center">
             <input class="btn btn-primary" type="submit" value="提交" />
             <input class="btn btn-default" type="reset" value="重置" />
-            <input class="btn btn-default" type="button" value="返回" />
+            <input class="btn btn-default" type="button" value="返回" onclick="history.back()"/>
         </div>
     </form>
 </div>

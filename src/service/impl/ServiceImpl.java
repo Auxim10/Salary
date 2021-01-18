@@ -3,6 +3,7 @@ package service.impl;
 import dao.Impl.EmployeeDaoImpl;
 import dao.dao;
 import domain.Employee;
+import domain.User;
 import operate.PageBean;
 import service.Service;
 
@@ -17,8 +18,13 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public Employee login(Employee employee) {
-        return null;
+    public User login(User user) {
+        return dao.findUserByUsernameAndPassword(user.getUsername(),user.getPassword());
+    }
+
+    @Override
+    public boolean repeat(Employee employee) {
+        return false;
     }
 
 
@@ -34,7 +40,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public Employee findUserById(String eno) {
-        return dao.findById(Integer.parseInt(eno));
+        return dao.findById(eno);
     }
 
     @Override
@@ -71,7 +77,7 @@ public class ServiceImpl implements Service {
 
         //3.调用dao查询总记录数
         int totalCount = dao.findTotalCount(condition);
-        pb.setTotalCount(totalCount);
+        pb.setTotalCount(totalCount-1);
         //4.调用dao查询List集合
         //计算开始的记录索引
         int start = (currentPage - 1) * rows;

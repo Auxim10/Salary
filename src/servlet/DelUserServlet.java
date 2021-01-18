@@ -20,7 +20,7 @@ public class DelUserServlet extends HttpServlet {
         service.deleteUser(eno);
 
         //3.跳转到查询所有Servlet
-        response.sendRedirect(request.getContextPath()+"/EmployeeListServlet");
+        response.sendRedirect(request.getContextPath()+"/findUserByPageServlet");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

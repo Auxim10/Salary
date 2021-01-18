@@ -15,7 +15,7 @@
     initial-scale: 初始的缩放比，为1:1 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>用户信息管理系统</title>
+    <title>工资管理系统</title>
 
     <!-- 1. 导入CSS的全局样式 -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -81,61 +81,59 @@
 
     </script>
 </head>
+
+
 <body>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href=""><img src="money.png" width="22" height="22"> 工资管理系统</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a style="text-align: left" href="${pageContext.request.contextPath}/findUserByPageServlet">查询员工信息</a></li>
+                <li><a style="text-align: left" href="${pageContext.request.contextPath}/salaryServlet">查询工资信息</a></li>
+                <li><a style="text-align: left" href="${pageContext.request.contextPath}/deptGradeWelfareServlet">工资设定</a></li>
+                <li style="align-content: end"><a href="login.jsp">管理员，退出登录</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div> </div>
 <div class="container">
+    <br>
+
+
     <h3 style="text-align: center">用户信息列表</h3>
 
-    <div style="float: left;">
 
-        <form class="form-inline" action="${pageContext.request.contextPath}/findUserByPageServlet" method="post">
-            <div class="form-group">
-                <label for="exampleInputName2">姓名</label>
-                <input type="text" name="name" value="${condition.name[0]}" class="form-control" id="exampleInputName2" >
-            </div>
-            <div class="form-group">
-                <label for="exampleInputName3">籍贯</label>
-                <input type="text" name="address" value="${condition.address[0]}" class="form-control" id="exampleInputName3" >
-            </div>
+    <BR>
 
-            <div class="form-group">
-                <label for="exampleInputEmail2">邮箱</label>
-                <input type="text" name="email" value="${condition.email[0]}" class="form-control" id="exampleInputEmail2"  >
-            </div>
-            <button type="submit" class="btn btn-default">查询</button>
-        </form>
-
-    </div>
-
-    <div style="float: right;margin: 5px;">
-
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/add.jsp">添加联系人</a>
-        <a class="btn btn-primary" href="javascript:void(0);" id="delSelected">删除选中</a>
-
-    </div>
     <form id="form" action="${pageContext.request.contextPath}/delSelectedServlet" method="post">
-        <table border="1" class="table table-bordered table-hover">
+        <table border="1" class="table table-bordered table-hover table-striped">
         <tr class="success">
-            <th><input type="checkbox" id="firstCb"></th>
             <th>编号</th>
             <th>姓名</th>
             <th>部门</th>
             <th>性别</th>
             <th>职位</th>
             <th>评价</th>
+            <th>工龄</th>
             <th>福利</th>
             <th>操作</th>
         </tr>
 
-        <c:forEach items="${employees}" var="employee" varStatus="s">
+        <c:forEach items="${pb.list}" var="employee" varStatus="s">
             <tr>
-                <td><input type="checkbox" name="uid" value="${employee.eno}"></td>
                 <td>${employee.eno}</td>
                 <td>${employee.ename}</td>
                 <td>${employee.edept}</td>
                 <td>${employee.esex}</td>
                 <td>${employee.egrade}</td>
                 <td>${employee.erank}</td>
-                <td>${employee.ewalfare}</td>
+                <td>${employee.eage}</td>
+                <td>${employee.ewelfare}</td>
                 <td><a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/findUserServlet?eno=${employee.eno}">修改</a>&nbsp;
                     <a class="btn btn-default btn-sm" href="javascript:deleteUser(${employee.eno});">删除</a></td>
             </tr>
@@ -145,7 +143,18 @@
 
     </table>
     </form>
-    <div>
+    <div style="float: right;margin: 5px;">
+
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/addAllServlet">添加员工</a>
+
+
+    </div>
+
+
+    
+
+
+    <div >
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <c:if test="${pb.currentPage == 1}">
@@ -157,9 +166,6 @@
                 </c:if>
 
 
-                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage - 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
                 </li>
 
 
@@ -167,22 +173,16 @@
 
 
                     <c:if test="${pb.currentPage == i}">
-                        <li class="active"><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=15&ename=${condition.ename[0]}&eno=${condition.eno[0]}&edept=${condition.edept[0]}">${i}</a></li>
                     </c:if>
                     <c:if test="${pb.currentPage != i}">
-                        <li><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=15&ename=${condition.ename[0]}&eno=${condition.eno[0]}&edept=${condition.edept[0]}">${i}</a></li>
                     </c:if>
 
                 </c:forEach>
 
-
-                <li>
-                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage + 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <span style="font-size: 25px;margin-left: 5px;">
-                    共${pb.totalCount}条记录，共${pb.totalPage}页
+                <span style="text-align:center; float: left; font-size: 21px;margin-right: 5px; ">
+                          ----共${pb.totalCount}条信息
                 </span>
 
             </ul>
@@ -194,6 +194,29 @@
 
 </div>
 
+
+<div class="container">
+
+<h3 style="text-align: center">用户信息筛选</h3>
+
+    <form class="form-inline" action="${pageContext.request.contextPath}/findUserByPageServlet" method="post">
+        <table border="2" class="table table-bordered table-hover table-striped" >
+            <tr class="success">
+                <th><label for="exampleInputName3">员工号</label></th>
+                <th><label for="exampleInputName2">姓名</label></th>
+                <th><label for="exampleInputEmail2">部门</label></th>
+                <th>查询</th>
+            </tr>
+                <tr>
+                    <td><input type="text" name="eno" style="width: 80px" value="${condition.eno[0]}" class="form-control" id="exampleInputName3" ></td>
+                    <td><input type="text" name="ename " style="width: 60px" value="${condition.ename[0]}" class="form-control" id="exampleInputName2" ></td>
+                    <td><input type="text" name="edept" style="width: 60px" value="${condition.edept[0]}" class="form-control" id="exampleInputEmail2"  ></td>
+                    <td><button type="submit" class="btn btn-default">查询</button></td>
+                </tr>
+
+        </table>
+    </form>
+</div>
 
 </body>
 </html>

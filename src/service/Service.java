@@ -1,6 +1,8 @@
 package service;
 
 import domain.Employee;
+import domain.Salary;
+import domain.User;
 import operate.PageBean;
 
 import java.util.List;
@@ -14,15 +16,18 @@ public interface Service {
 
     /**
      * 登录方法
-     * @param employee
+     * @param user
      * @return
      */
-    Employee login(Employee employee);
+     User login(User user);
 
     /**
      * 保存User
      * @param employee
      */
+
+    boolean repeat(Employee employee);
+
     void addUser(Employee employee);
 
     /**
@@ -58,7 +63,6 @@ public interface Service {
      * @return
      */
     PageBean<Employee> findUserByPage(String currentPage, String rows, Map<String, String[]> condition);
-
 
 }
 

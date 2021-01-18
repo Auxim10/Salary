@@ -22,6 +22,7 @@ public class EmployeeListServlet extends HttpServlet {
         request.setAttribute("employees",employees);
         //转发
         request.getRequestDispatcher("/list.jsp").forward(request,response);
+        System.out.println("正在访问员工信息..");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

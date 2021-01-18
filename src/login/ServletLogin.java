@@ -27,7 +27,7 @@ public class ServletLogin extends HttpServlet {
 
         Userdao logindao = new Userdao();
         User user =logindao.login(loginuser);
-
+        System.out.println(logindao);
         if(user == null){
             request.getRequestDispatcher("/ServletLoginfalse").forward(request,response);
         }else{
@@ -40,6 +40,6 @@ public class ServletLogin extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        this.doPost(request, response);
     }
 }

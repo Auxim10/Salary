@@ -17,20 +17,29 @@
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
   </script>
+
+<body style="background: url(/grayback.jpg) ; background-size:100% 100% ; background-attachment: fixed">
+
+</body>
+
+
+  <meta charset="utf-8">
+  <title>工资管理系统Jumbotron）</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 
-  <div >${user.name},欢迎您</div>
-  <div align="center">
-    <a
-            href="${pageContext.request.contextPath}/EmployeeListServlet" style="text-decoration:none;font-size:33px">查询所有用户信息
-    </a>
+<div class="jumbotron" >
+  <div class="container">
+    <h1>工资管理系统</h1>
+    <p>Salary Management System</p>
+    <br>
+    <center><a style="align-content: center" class="btn btn-primary btn-lg" href="login.jsp" role="button">开始使用</a></center>
   </div>
-
-
-
-
+</div>
 
 
 </body>

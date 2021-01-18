@@ -27,8 +27,9 @@
 </head>
 <body>
 <div class="container" style="width: 400px;">
-    <h3 style="text-align: center;">管理员登录</h3>
-    <form action="${pageContext.request.contextPath}/loginServlet" method="post">
+    <h3 style="text-align: center;">登录</h3>
+    <form action="${pageContext.request.contextPath}/LoginServlet" method="post">
+        <input type="hidden" name="id" value="${user.id}">
         <div class="form-group">
             <label for="user">用户名：</label>
             <input type="text" name="username" class="form-control" id="user" placeholder="请输入用户名"/>
@@ -53,12 +54,16 @@
     </form>
 
     <!-- 出错显示的信息框 -->
-    <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" >
-            <span>&times;</span>
-        </button>
-        <strong>${login_msg}</strong>
-    </div>
+    <c:if test="${not empty login_msg}">
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" >
+                <span>&times;</span></button>
+            <strong><h2>${login_msg}</h2>
+                <br>用户名："员工号"
+                <br>默认密码:123456
+            </strong>
+        </div>
+    </c:if>
 </div>
 </body>
 </html>

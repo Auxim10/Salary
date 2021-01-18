@@ -30,7 +30,7 @@ public class FindUserByPageServlet extends HttpServlet {
 
 
         if(rows == null || "".equals(rows)){
-            rows = "5";
+            rows = "15";
         }
         
         //获取条件查询参数
@@ -48,6 +48,7 @@ public class FindUserByPageServlet extends HttpServlet {
         request.setAttribute("condition",condition);//将查询条件存入request
         //4.转发到list.jsp
         request.getRequestDispatcher("/list.jsp").forward(request,response);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

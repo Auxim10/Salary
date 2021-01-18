@@ -8,82 +8,85 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>修改用户</title>
+        <title>修改员工信息</title>
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <script src="js/jquery-2.1.0.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         
     </head>
+
+
     <body>
         <div class="container" style="width: 400px;">
-        <h3 style="text-align: center;">修改联系人</h3>
-        <form action="${pageContext.request.contextPath}/EmployeeUpdateServlet" method="post">
+        <h3 style="text-align: center;">修改员工信息</h3>
+        <form action="${pageContext.request.contextPath}/updateUserServlet" method="post">
             <!--  隐藏域 提交id-->
-            <input type="hidden" name="id" value="${user.id}">
+            <input type="hidden" name="id" value="${employee.eno}">
 
-          <div class="form-group">
-            <label for="name">姓名：</label>
-            <input type="text" class="form-control" id="name" name="name"  value="${user.name}" readonly="readonly" placeholder="请输入姓名" />
-          </div>
+            <div class="form-group">
+                <label for="eno">员工号：</label>
+                <input type="text" readonly class="form-control" value="${employee.eno}" name="eno" maxlength="8" placeholder="请输入员工号">
+            </div>
 
-          <div class="form-group">
-            <label>性别：</label>
-              <c:if test="${user.gender == '男'}">
-                  <input type="radio" name="gender" value="男" checked />男
-                  <input type="radio" name="gender" value="女"  />女
-              </c:if>
+            <div class="form-group">
+                <label for="ename">姓名：</label>
+                <input type="text" class="form-control" value="${employee.ename}" name="ename" maxlength="10" placeholder="请输入姓名">
+            </div>
 
-              <c:if test="${user.gender == '女'}">
-                  <input type="radio" name="gender" value="男"  />男
-                  <input type="radio" name="gender" value="女" checked  />女
-              </c:if>
+            <div class="form-group">
+                <label>性别：</label>
+                <input type="radio" name="esex" value="男" checked="checked"/>男
+                <input type="radio" name="esex" value="女"/>女
+            </div>
 
 
-          </div>
+            <div class="form-group">
+                <label for="edept">部门：</label>
+                <select name="edept" class="form-control" id="edept">
+                    <c:forEach items="${departments}" var="departmnet" varStatus="s">
+                        <option value=${departmnet.dname}>${departmnet.dname}</option>
+                    </c:forEach>
+                </select>
+            </div>
 
-          <div class="form-group">
-            <label for="age">年龄：</label>
-            <input type="text" class="form-control" value="${user.age}" id="age"  name="age" placeholder="请输入年龄" />
-          </div>
+            <div class="form-group">
+                <label for="egrade">职位：</label>
+                <select name="egrade" class="form-control" id="egrade">
+                    <c:forEach items="${salarygrades}" var="salarygrade" varStatus="s">
+                        <option value=${salarygrade.grade}>${salarygrade.grade}</option>
+                    </c:forEach>
+                </select>
+            </div>
 
-          <div class="form-group">
-            <label for="address">籍贯：</label>
-             <select name="address" id="address" class="form-control" >
-                 <c:if test="${user.address == '陕西'}">
-                    <option value="陕西" selected>陕西</option>
-                    <option value="北京">北京</option>
-                    <option value="上海">上海</option>
-                 </c:if>
+            <div class="form-group">
+                <label for="erank">评价：</label>
+                <select name="erank" class="form-control" value="${employee.erank}">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            </div>
 
-                 <c:if test="${user.address == '北京'}">
-                     <option value="陕西" >陕西</option>
-                     <option value="北京" selected>北京</option>
-                     <option value="上海">上海</option>
-                 </c:if>
+            <div class="form-group">
+                <label for="eage">工龄：</label>
+                <input type="number" class="form-control" value="${employee.eage}" name="eage" maxlength="2" placeholder="请输入工龄"/>
+            </div>
 
-                 <c:if test="${user.address == '上海'}">
-                     <option value="陕西" >陕西</option>
-                     <option value="北京">北京</option>
-                     <option value="上海" selected>上海</option>
-                 </c:if>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="qq">QQ：</label>
-            <input type="text" id="qq" class="form-control" value="${user.qq}" name="qq" placeholder="请输入QQ号码"/>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email：</label>
-            <input type="text" id="email" class="form-control" value="${user.email}" name="email" placeholder="请输入邮箱地址"/>
-          </div>
+            <div class="form-group">
+                <label for="ewelfare">福利：</label>
+                <select name="ewelfare" class="form-control" id="ewelfare">
+                    <c:forEach items="${welfares}" var="welfare" varStatus="s">
+                        <option value=${welfare.wname}>${welfare.wname}</option>
+                    </c:forEach>
+                </select>
+            </div>
 
              <div class="form-group" style="text-align: center">
                 <input class="btn btn-primary" type="submit" value="提交" />
                 <input class="btn btn-default" type="reset" value="重置" />
-                <input class="btn btn-default" type="button" value="返回"/>
+                <input class="btn btn-default" type="button" value="返回" onclick="history.back()"/>
              </div>
         </form>
         </div>

@@ -2,6 +2,8 @@ package dao.Impl;
 
 import dao.dao;
 import domain.Employee;
+import domain.Salary;
+import domain.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import util.JDBCUtils;
@@ -15,7 +17,7 @@ public class EmployeeDaoImpl implements dao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
     @Override
     public List<Employee> findALL() {
-        String sql = "select * from employee";
+        String sql = "select * from employee where eno != '1'";
         List<Employee> employees = template.query(sql, new BeanPropertyRowMapper<>(Employee.class));
         return employees;
     }
@@ -24,10 +26,40 @@ public class EmployeeDaoImpl implements dao {
 
     @Override
     public void add(Employee employee) {
+
+
         //1.定义sql
         String sql = "insert into employee values(?,?,?,?,?,?,?,?)";
         //2.执行sql
-        template.update(sql,employee.getEno(),employee.getEname(), employee.getEdept(), employee.getEsex(), employee.getEgrade(), employee.getErank(), employee.getEage(),employee.getEwalfare());
+        template.update(sql,employee.getEno(),employee.getEname(), employee.getEdept(), employee.getEsex(), employee.getEgrade(), employee.getErank(), employee.getEage(),employee.getEwelfare());
+    }
+
+    @Override
+    public boolean re(String eno) {
+        String sql = "select eno from employee where eno = ?";
+
+        return false;
+
+    }
+
+
+    @Override
+    public User findUserByUsernameAndPassword(String username, String password) {
+        try {
+            String sql = "select * from user where username = ? and password = ?";
+            User user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, password);
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    @Override
+    public Salary deptsalary(Salary salary,String dept) {
+        String sql = "select sum(allsalary) from salary,employee where salary.sno = employee.eno and edept = ? group by ?";
+        return template.queryForObject(sql, new BeanPropertyRowMapper<Salary>(Salary.class),dept,dept);
     }
 
     @Override
@@ -39,15 +71,24 @@ public class EmployeeDaoImpl implements dao {
     }
 
     @Override
-    public Employee findById(int eno) {
-        String sql = "select * from employee where eno = ?";
-        return template.queryForObject(sql, new BeanPropertyRowMapper<Employee>(Employee.class), eno);
+    public Employee findById(String eno) {
+        try {
+            String sql = "select * from employee where eno = ?";
+            return template.queryForObject(sql, new BeanPropertyRowMapper<Employee>(Employee.class), eno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public void update(Employee employee) {
-        String sql = "update employee set eno = ?,ename = ? ,edept = ? , esex = ? , egrade = ?, erank = ?,eage = ?,ewalfare = ? where eno = ?";
-        template.update(sql, employee.getEno(),employee.getEname(), employee.getEdept(), employee.getEsex(), employee.getEgrade(), employee.getErank(), employee.getEage(), employee.getEwalfare(),employee.getEno());
+        String oldeno = employee.getEno();
+        System.out.println("oldeno,update:"+oldeno);
+        String sql = "update employee set eno = ?,ename = ? ,edept = ? , esex = ? , egrade = ?, erank = ?,eage = ?,ewelfare = ? where eno = ?";
+        template.update(sql,employee.getEno(),employee.getEname(), employee.getEdept(), employee.getEsex(), employee.getEgrade(), employee.getErank(), employee.getEage(), employee.getEwelfare(),employee.getId());
+        System.out.println("update:"+employee);
+
     }
 
     @Override
@@ -81,9 +122,11 @@ public class EmployeeDaoImpl implements dao {
         return template.queryForObject(sb.toString(),Integer.class,params.toArray());
     }
 
+
+
     @Override
     public List<Employee> findByPage(int start, int rows, Map<String, String[]> condition) {
-        String sql = "select * from employee  where 1 = 1 ";
+        String sql = "select * from employee  where 1 = 1 and eno != '1'";
 
         StringBuilder sb = new StringBuilder(sql);
         //2.遍历map
@@ -117,5 +160,19 @@ public class EmployeeDaoImpl implements dao {
         System.out.println(params);
 
         return template.query(sql,new BeanPropertyRowMapper<Employee>(Employee.class),params.toArray());
+    }
+
+    @Override
+    public void refresh(String eno) {
+        String sql = "update employee set ";
+    }
+
+
+    public JdbcTemplate getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(JdbcTemplate template) {
+        this.template = template;
     }
 }
